@@ -4,13 +4,12 @@ import {
   TextInput,
   ImageBackground,
   StyleSheet,
-  SafeAreaView,
-  Button,
   Pressable,
 } from "react-native";
 import { useFonts } from "expo-font";
 import background1x from "../assets/images/bg1x.jpg";
 import background2x from "../assets/images/bg2x.jpg";
+import TriangleDown from "../Components/Icons/Union";
 
 const RegistrationScreen = () => {
   const [fontsLoaded] = useFonts({
@@ -29,7 +28,12 @@ const RegistrationScreen = () => {
       style={styles.background}
     >
       <View style={styles.registerContainer}>
-        <View style={styles.avatar}></View>
+        <View style={styles.avatar}>
+          <View style={styles.addAvatar}>
+            <TriangleDown />
+          </View>
+        </View>
+
         <Pressable></Pressable>
         <Text style={styles.title}>Реєстрація</Text>
         <View>
@@ -169,5 +173,15 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     position: "absolute",
     top: -60,
+  },
+  addAvatar: {
+    position: "absolute",
+    right: -12,
+    top: 81,
+    borderWidth: 1,
+    borderColor: "#FF6C00",
+    borderRadius: 999,
+    width: 25,
+    height: 25,
   },
 });
