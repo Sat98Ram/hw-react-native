@@ -5,14 +5,14 @@ import RegistrationScreen from "./screens/RegistrationScreen";
 
 export default function App() {
   return (
-    <View>
+    <View style={styles.container}>
       <RegistrationScreen />
     </View>
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     backgroundColor: "#fff",
-//   },
-// });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
