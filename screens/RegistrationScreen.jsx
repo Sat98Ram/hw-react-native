@@ -5,8 +5,10 @@ import {
   ImageBackground,
   StyleSheet,
   Pressable,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useFonts } from "expo-font";
+import { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import background1x from "../assets/images/bg1x.jpg";
@@ -14,6 +16,10 @@ import background2x from "../assets/images/bg2x.jpg";
 import UnionIcon from "../Components/Icons/Union";
 
 const RegistrationScreen = () => {
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
     "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
@@ -24,64 +30,69 @@ const RegistrationScreen = () => {
     return null;
   }
 
+  const signUp = () => {
+    console.log("login: " + login, "password: " + password, "email: " + email);
+  };
+
   return (
-    <KeyboardAwareScrollView
-      style={{ backgroundColor: "#fff" }}
-      resetScrollToCoords={{ x: 0, y: 0 }}
-      contentContainerStyle={{ flex: 1 }}
-      scrollEnabled={true}
+    <ImageBackground
+      source={(background1x, background2x)}
+      style={styles.background}
     >
-      <ImageBackground
-        source={(background1x, background2x)}
-        style={styles.background}
-      >
-        <View style={styles.registerContainer}>
-          <View style={styles.avatar}>
-            <Pressable style={styles.addAvatar}>
-              <UnionIcon />
-            </Pressable>
-          </View>
-
-          <Text style={styles.title}>Реєстрація</Text>
-          <View>
-            <TextInput
-              keyboardType="default"
-              placeholder="Логін"
-              style={styles.input}
-            />
-            <TextInput
-              keyboardType="email-address"
-              placeholder="Адреса електронної пошти"
-              style={styles.input}
-            />
-            <TextInput
-              keyboardType="visible-password"
-              placeholder="Пароль"
-              style={styles.passwordInput}
-            />
-            <Text style={styles.showPassword}>Показати</Text>
-
-            <Pressable
-              onPress={() => {
-                console.log("register button");
-              }}
-              style={({ pressed }) => [
-                {
-                  backgroundColor: pressed ? "#ff8833" : "#FF6C00",
-                },
-                styles.buttonRegister,
-              ]}
-            >
-              <Text style={styles.buttonText}>Зареєстуватися</Text>
-            </Pressable>
-            <Text style={styles.link}>Вже є акаунт? Увійти</Text>
-          </View>
-          <View style={styles.bottom}>
-            <View style={styles.line}></View>
-          </View>
+      <View style={styles.registerContainer}>
+        <View style={styles.avatar}>
+          <Pressable style={styles.addAvatar}>
+            <UnionIcon />
+          </Pressable>
         </View>
-      </ImageBackground>
-    </KeyboardAwareScrollView>
+
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+          style={{ alignItems: "center" }}
+        >
+          <Text style={styles.title}>Реєстрація</Text>
+
+          <TextInput
+            value={login}
+            onChangeText={setLogin}
+            keyboardType="default"
+            placeholder="Логін"
+            style={styles.input}
+          />
+          <TextInput
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            placeholder="Адреса електронної пошти"
+            style={styles.input}
+          />
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            keyboardType="visible-password"
+            placeholder="Пароль"
+            style={styles.passwordInput}
+          />
+          <Text style={styles.showPassword}>Показати</Text>
+        </KeyboardAvoidingView>
+
+        <Pressable
+          onPress={signUp}
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed ? "#ff8833" : "#FF6C00",
+            },
+            styles.buttonRegister,
+          ]}
+        >
+          <Text style={styles.buttonText}>Зареєстуватися</Text>
+        </Pressable>
+        <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+        <View style={styles.bottom}>
+          <View style={styles.line}></View>
+        </View>
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -135,7 +146,7 @@ const styles = StyleSheet.create({
   },
   showPassword: {
     position: "absolute",
-    top: 148,
+    top: 222,
     right: 16,
     fontFamily: "Roboto-Regular",
     fontSize: 16,
@@ -147,6 +158,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     marginBottom: 16,
     alignItems: "center",
+    width: "100%",
   },
   buttonText: {
     color: "#FFFFFF",

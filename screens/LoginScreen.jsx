@@ -5,7 +5,10 @@ import {
   ImageBackground,
   StyleSheet,
   Pressable,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
+import { useState } from "react";
 import { useFonts } from "expo-font";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
@@ -13,6 +16,9 @@ import background1x from "../assets/images/bg1x.jpg";
 import background2x from "../assets/images/bg2x.jpg";
 
 const LoginScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
     "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
@@ -22,50 +28,63 @@ const LoginScreen = () => {
   if (!fontsLoaded) {
     return null;
   }
+
+  const signIn = () => {
+    console.log("password: " + password, "email: " + email);
+  };
+
   return (
-    <KeyboardAwareScrollView
-      style={{ backgroundColor: "#fff" }}
-      resetScrollToCoords={{ x: 0, y: 0 }}
-      contentContainerStyle={{ flex: 1 }}
-      scrollEnabled={true}
+    // <KeyboardAwareScrollView
+    //   style={{ backgroundColor: "#fff" }}
+    //   resetScrollToCoords={{ x: 0, y: 0 }}
+    //   contentContainerStyle={{ flex: 1 }}
+    //   scrollEnabled={true}
+    // >
+    <ImageBackground
+      source={(background1x, background2x)}
+      style={styles.background}
     >
-      <ImageBackground
-        source={(background1x, background2x)}
-        style={styles.background}
-      >
-        <View style={styles.loginContainer}>
+      <View style={styles.loginContainer}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+          style={{ alignItems: "center" }}
+        >
           <Text style={styles.title}>Увійти</Text>
           <TextInput
+            value={email}
+            onChangeText={setEmail}
             keyboardType="email-address"
             placeholder="Адреса електронної пошти"
             style={styles.input}
           />
           <TextInput
+            value={password}
+            onChangeText={setPassword}
             keyboardType="visible-password"
             placeholder="Пароль"
             style={styles.passwordInput}
           />
           <Text style={styles.showPassword}>Показати</Text>
-          <Pressable
-            onPress={() => {
-              console.log("register button");
-            }}
-            style={({ pressed }) => [
-              {
-                backgroundColor: pressed ? "#ff8833" : "#FF6C00",
-              },
-              styles.buttonLogin,
-            ]}
-          >
-            <Text style={styles.buttonText}>Увійти</Text>
-          </Pressable>
-          <Text style={styles.link}>Немає акаунту? Зареєструватися</Text>
-          <View style={styles.bottom}>
-            <View style={styles.line}></View>
-          </View>
+        </KeyboardAvoidingView>
+
+        <Pressable
+          onPress={signIn}
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed ? "#ff8833" : "#FF6C00",
+            },
+            styles.buttonLogin,
+          ]}
+        >
+          <Text style={styles.buttonText}>Увійти</Text>
+        </Pressable>
+        <Text style={styles.link}>Немає акаунту? Зареєструватися</Text>
+        <View style={styles.bottom}>
+          <View style={styles.line}></View>
         </View>
-      </ImageBackground>
-    </KeyboardAwareScrollView>
+      </View>
+    </ImageBackground>
+    // </KeyboardAwareScrollView>
   );
 };
 
@@ -123,8 +142,8 @@ const styles = StyleSheet.create({
 
   showPassword: {
     position: "absolute",
-    top: 188,
-    right: 40,
+    top: 156,
+    right: 16,
     fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
