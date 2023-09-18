@@ -7,9 +7,11 @@ import {
   Pressable,
 } from "react-native";
 import { useFonts } from "expo-font";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 import background1x from "../assets/images/bg1x.jpg";
 import background2x from "../assets/images/bg2x.jpg";
-import TriangleDown from "../Components/Icons/Union";
+import UnionIcon from "../Components/Icons/Union";
 
 const RegistrationScreen = () => {
   const [fontsLoaded] = useFonts({
@@ -23,57 +25,63 @@ const RegistrationScreen = () => {
   }
 
   return (
-    <ImageBackground
-      source={(background1x, background2x)}
-      style={styles.background}
+    <KeyboardAwareScrollView
+      style={{ backgroundColor: "#fff" }}
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      contentContainerStyle={{ flex: 1 }}
+      scrollEnabled={true}
     >
-      <View style={styles.registerContainer}>
-        <View style={styles.avatar}>
-          <View style={styles.addAvatar}>
-            <TriangleDown />
+      <ImageBackground
+        source={(background1x, background2x)}
+        style={styles.background}
+      >
+        <View style={styles.registerContainer}>
+          <View style={styles.avatar}>
+            <Pressable style={styles.addAvatar}>
+              <UnionIcon />
+            </Pressable>
+          </View>
+
+          <Text style={styles.title}>Реєстрація</Text>
+          <View>
+            <TextInput
+              keyboardType="default"
+              placeholder="Логін"
+              style={styles.input}
+            />
+            <TextInput
+              keyboardType="email-address"
+              placeholder="Адреса електронної пошти"
+              style={styles.input}
+            />
+            <TextInput
+              keyboardType="visible-password"
+              placeholder="Пароль"
+              style={styles.passwordInput}
+            />
+            <Text style={styles.showPassword}>Показати</Text>
+
+            <Pressable
+              onPress={() => {
+                console.log("register button");
+              }}
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed ? "#ff8833" : "#FF6C00",
+                },
+                styles.buttonRegister,
+              ]}
+            >
+              <Text style={styles.buttonText}>Зареєстуватися</Text>
+            </Pressable>
+            <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+          </View>
+          <View style={styles.bottom}>
+            <View style={styles.line}></View>
           </View>
         </View>
-
-        <Pressable></Pressable>
-        <Text style={styles.title}>Реєстрація</Text>
-        <View>
-          <TextInput
-            keyboardType="default"
-            placeholder="Логін"
-            style={styles.input}
-          />
-          <TextInput
-            keyboardType="email-address"
-            placeholder="Адреса електронної пошти"
-            style={styles.input}
-          />
-          <TextInput
-            keyboardType="visible-password"
-            placeholder="Пароль"
-            style={styles.passwordInput}
-          />
-          <Text style={styles.showPassword}>Показати</Text>
-
-          <Pressable
-            onPress={() => {
-              console.log("register button");
-            }}
-            style={({ pressed }) => [
-              {
-                backgroundColor: pressed ? "#ff8833" : "#FF6C00",
-              },
-              styles.buttonRegister,
-            ]}
-          >
-            <Text style={styles.buttonText}>Зареєстуватися</Text>
-          </Pressable>
-          <Text style={styles.link}>Вже є акаунт? Увійти</Text>
-        </View>
-        <View style={styles.bottom}>
-          <View style={styles.line}></View>
-        </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </KeyboardAwareScrollView>
   );
 };
 
