@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     color: "#1B4371",
-    marginBottom: 45,
+    marginBottom: 111,
   },
 
   bottom: {
