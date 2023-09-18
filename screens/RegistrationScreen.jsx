@@ -6,6 +6,8 @@ import {
   StyleSheet,
   Pressable,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { useState } from "react";
@@ -39,59 +41,60 @@ const RegistrationScreen = () => {
       source={(background1x, background2x)}
       style={styles.background}
     >
-      <View style={styles.registerContainer}>
-        <View style={styles.avatar}>
-          <Pressable style={styles.addAvatar}>
-            <UnionIcon />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.registerContainer}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            style={{ alignItems: "center" }}
+          >
+            <View style={styles.avatar}>
+              <Pressable style={styles.addAvatar}>
+                <UnionIcon />
+              </Pressable>
+            </View>
+            <Text style={styles.title}>Реєстрація</Text>
+
+            <TextInput
+              value={login}
+              onChangeText={setLogin}
+              keyboardType="default"
+              placeholder="Логін"
+              style={styles.input}
+            />
+            <TextInput
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              placeholder="Адреса електронної пошти"
+              style={styles.input}
+            />
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              keyboardType="visible-password"
+              placeholder="Пароль"
+              style={styles.passwordInput}
+            />
+            <Text style={styles.showPassword}>Показати</Text>
+          </KeyboardAvoidingView>
+
+          <Pressable
+            onPress={signUp}
+            style={({ pressed }) => [
+              {
+                backgroundColor: pressed ? "#ff8833" : "#FF6C00",
+              },
+              styles.buttonRegister,
+            ]}
+          >
+            <Text style={styles.buttonText}>Зареєстуватися</Text>
           </Pressable>
+          <Text style={styles.link}>Вже є акаунт? Увійти</Text>
+          <View style={styles.bottom}>
+            <View style={styles.line}></View>
+          </View>
         </View>
-
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-          style={{ alignItems: "center" }}
-        >
-          <Text style={styles.title}>Реєстрація</Text>
-
-          <TextInput
-            value={login}
-            onChangeText={setLogin}
-            keyboardType="default"
-            placeholder="Логін"
-            style={styles.input}
-          />
-          <TextInput
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            placeholder="Адреса електронної пошти"
-            style={styles.input}
-          />
-          <TextInput
-            value={password}
-            onChangeText={setPassword}
-            keyboardType="visible-password"
-            placeholder="Пароль"
-            style={styles.passwordInput}
-          />
-          <Text style={styles.showPassword}>Показати</Text>
-        </KeyboardAvoidingView>
-
-        <Pressable
-          onPress={signUp}
-          style={({ pressed }) => [
-            {
-              backgroundColor: pressed ? "#ff8833" : "#FF6C00",
-            },
-            styles.buttonRegister,
-          ]}
-        >
-          <Text style={styles.buttonText}>Зареєстуватися</Text>
-        </Pressable>
-        <Text style={styles.link}>Вже є акаунт? Увійти</Text>
-        <View style={styles.bottom}>
-          <View style={styles.line}></View>
-        </View>
-      </View>
+      </TouchableWithoutFeedback>
     </ImageBackground>
   );
 };
@@ -192,7 +195,7 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 16,
     position: "absolute",
-    top: -60,
+    top: -152,
   },
   addAvatar: {
     position: "absolute",
