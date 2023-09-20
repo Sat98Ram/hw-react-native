@@ -10,12 +10,12 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useFonts } from "expo-font";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Link } from "@react-navigation/native";
 
 import background1x from "../assets/images/bg1x.jpg";
 import background2x from "../assets/images/bg2x.jpg";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,67 +30,74 @@ const LoginScreen = () => {
   }
 
   const signIn = () => {
-    console.log("password: " + password, "email: " + email);
+    const logedinUser = { password, email };
+    console.log(logedinUser);
+    setEmail("");
+    setPassword("");
   };
 
   return (
-    // <KeyboardAwareScrollView
-    //   style={{ backgroundColor: "#fff" }}
-    //   resetScrollToCoords={{ x: 0, y: 0 }}
-    //   contentContainerStyle={{ flex: 1 }}
-    //   scrollEnabled={true}
-    // >
-    <ImageBackground
-      source={(background1x, background2x)}
-      style={styles.background}
-    >
-      <View style={styles.loginContainer}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-          style={{ alignItems: "center" }}
-        >
-          <Text style={styles.title}>Увійти</Text>
-          <TextInput
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            placeholder="Адреса електронної пошти"
-            style={styles.input}
-          />
-          <TextInput
-            value={password}
-            onChangeText={setPassword}
-            keyboardType="visible-password"
-            placeholder="Пароль"
-            style={styles.passwordInput}
-          />
-          <Text style={styles.showPassword}>Показати</Text>
-        </KeyboardAvoidingView>
+    <View style={styles.container}>
+      <ImageBackground
+        source={(background1x, background2x)}
+        style={styles.background}
+      >
+        <View style={styles.loginContainer}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            style={{ alignItems: "center" }}
+          >
+            <Text style={styles.title}>Увійти</Text>
+            <TextInput
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              placeholder="Адреса електронної пошти"
+              style={styles.input}
+            />
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              keyboardType="visible-password"
+              placeholder="Пароль"
+              style={styles.passwordInput}
+            />
+            <Text style={styles.showPassword}>Показати</Text>
+          </KeyboardAvoidingView>
 
-        <Pressable
-          onPress={signIn}
-          style={({ pressed }) => [
-            {
-              backgroundColor: pressed ? "#ff8833" : "#FF6C00",
-            },
-            styles.buttonLogin,
-          ]}
-        >
-          <Text style={styles.buttonText}>Увійти</Text>
-        </Pressable>
-        <Text style={styles.link}>Немає акаунту? Зареєструватися</Text>
-        <View style={styles.bottom}>
-          <View style={styles.line}></View>
+          <Pressable
+            onPress={signIn}
+            style={({ pressed }) => [
+              {
+                backgroundColor: pressed ? "#ff8833" : "#FF6C00",
+              },
+              styles.buttonLogin,
+            ]}
+          >
+            <Text style={styles.buttonText}>Увійти</Text>
+          </Pressable>
+          <Text style={styles.link}>
+            Немає акаунту?
+            <Text onPress={() => navigation.navigate("RegistrationScreen")}>
+              {" "}
+              Зареєструватися
+            </Text>
+          </Text>
+          <View style={styles.bottom}>
+            <View style={styles.line}></View>
+          </View>
         </View>
-      </View>
-    </ImageBackground>
-    // </KeyboardAwareScrollView>
+      </ImageBackground>
+    </View>
   );
 };
 
 export default LoginScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   background: {
     height: "100%",
     width: "100%",
@@ -167,6 +174,7 @@ const styles = StyleSheet.create({
 
   link: {
     textAlign: "center",
+
     fontFamily: "Roboto-Regular",
     fontSize: 16,
     lineHeight: 19,
@@ -186,5 +194,11 @@ const styles = StyleSheet.create({
     height: 5,
     width: 134,
     borderRadius: 8,
+  },
+  linkTo: {
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    lineHeight: 19,
+    color: "#1B4371",
   },
 });
