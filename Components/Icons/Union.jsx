@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-export default function UnionIcon() {
+const UnionIcon = () => {
   return (
     <View style={styles.container}>
       <Svg
@@ -20,7 +20,7 @@ export default function UnionIcon() {
       </Svg>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -29,3 +29,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+export default UnionIcon;

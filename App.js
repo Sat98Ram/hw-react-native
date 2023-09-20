@@ -22,7 +22,11 @@ export default function App() {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
-        <MainStack.Screen name="HomeScreen" component={Home} />
+        <MainStack.Screen
+          name="HomeScreen"
+          component={Home}
+          options={{ headerShown: false }}
+        />
       </MainStack.Navigator>
     </NavigationContainer>
   );
