@@ -3,7 +3,11 @@ import Logout from "./Icons/Logout";
 
 const LogoutBtn = () => {
   return (
-    <Pressable>
+    <Pressable
+      onPress={() => {
+        console.log("log out");
+      }}
+    >
       <Logout />
     </Pressable>
   );

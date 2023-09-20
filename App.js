@@ -7,10 +7,19 @@ import LoginScreen from "./screens/LoginScreen";
 import Home from "./screens/Home";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import LogoutBtn from "./Components/LogoutBtn";
+import { useFonts } from "expo-font";
 
 const MainStack = createStackNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <NavigationContainer>
       <MainStack.Navigator initialRouteName="LoginScreen">
@@ -34,6 +43,13 @@ export default function App() {
               case "Posts": {
                 return {
                   headerTitle: "Публікації",
+                  headerStyle: {
+                    backgroundColor: "#FFFFFF",
+                  },
+                  headerTitleStyle: {
+                    fontFamily: "Roboto-Medium",
+                    fontSize: 17,
+                  },
                   headerRight: LogoutBtn,
                 };
               }

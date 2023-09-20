@@ -11,15 +11,11 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import { useState } from "react";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import uuid from "react-native-uuid";
-import { Link } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
 
 import background1x from "../assets/images/bg1x.jpg";
 import background2x from "../assets/images/bg2x.jpg";
 import UnionIcon from "../Components/Icons/Union";
-import { ScrollView } from "react-native-gesture-handler";
 
 const RegistrationScreen = ({ navigation }) => {
   const [login, setLogin] = useState("");

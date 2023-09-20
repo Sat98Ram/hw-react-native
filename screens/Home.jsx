@@ -5,6 +5,7 @@ import CreatePostsScreen from "./CreatePostsScreen";
 import ProfileScreen from "./ProfileScreen";
 import { Pressable, Text } from "react-native";
 import LogoutBtn from "../Components/LogoutBtn";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +19,17 @@ const Tab = createBottomTabNavigator();
 
 const Home = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        // tabBarVisible: ((route) => {
+        //   const routeName = getFocusedRouteNameFromRoute(route) ?? "";
+        //   if (routeName === "CreatePosts") {
+        //     return false;
+        //   }
+        //   return true;
+        // })(route),
+      })}
+    >
       <Tab.Screen
         name="Posts"
         component={PostsScreen}
@@ -27,7 +38,11 @@ const Home = () => {
       <Tab.Screen
         name="CreatePosts"
         component={CreatePostsScreen}
-        options={{ headerShown: false }}
+        options={{
+          tabBarStyle: { display: "none" },
+          // tabBarVisible: false,
+          headerShown: false,
+        }}
       />
       <Tab.Screen
         name="Profile"
