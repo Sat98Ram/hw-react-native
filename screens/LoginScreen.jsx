@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useFonts } from "expo-font";
-import { Link } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 import background1x from "../assets/images/bg1x.jpg";
 import background2x from "../assets/images/bg2x.jpg";
@@ -34,6 +34,8 @@ const LoginScreen = ({ navigation }) => {
     console.log(logedinUser);
     setEmail("");
     setPassword("");
+
+    navigation.navigate("HomeScreen");
   };
 
   return (
