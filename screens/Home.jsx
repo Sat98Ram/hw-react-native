@@ -22,10 +22,7 @@ const Home = () => {
       <Tab.Screen
         name="Posts"
         component={PostsScreen}
-        options={{
-          title: "Публікації",
-          headerRight: LogoutBtn,
-        }}
+        options={{ headerShown: false }}
       />
       <Tab.Screen
         name="CreatePosts"
