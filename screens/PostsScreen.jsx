@@ -1,7 +1,19 @@
 import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+
 import { useFonts } from "expo-font";
+import { useState } from "react";
+import { FlatList } from "react-native-gesture-handler";
+import MapPin from "../Components/Icons/MapPin";
+import Message from "../Components/Icons/Message";
 
 const PostsScreen = () => {
+  const [images, setImages] = useState([
+    { id: "1", url: "../assets/images/exampleImage.jpg", name: "Ліс" },
+    { id: "2", url: "../assets/images/exampleImage.jpg", name: "Ліс" },
+    { id: "3", url: "../assets/images/exampleImage.jpg", name: "Ліс" },
+    { id: "4", url: "../assets/images/exampleImage.jpg", name: "Ліс" },
+  ]);
+
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
     "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
@@ -24,28 +36,31 @@ const PostsScreen = () => {
         </View>
       </View>
 
-      <View style={styles.imgContainer}>
-        <Image
-          source={require("../assets/images/exampleImage.jpg")}
-          style={styles.postImage}
-        />
-        <Text style={styles.postTitle}>Ліс</Text>
-      </View>
+      <View>
+        {images.map((image) => {
+          return (
+            <View style={styles.imgContainer}>
+              <Image
+                source={require("../assets/images/exampleImage.jpg")}
+                style={styles.postImage}
+              />
+              <Text style={styles.postTitle}>{image.name}</Text>
 
-      <View style={styles.imgContainer}>
-        <Image
-          source={require("../assets/images/exampleImage.jpg")}
-          style={styles.postImage}
-        />
-        <Text style={styles.postTitle}>Ліс</Text>
-      </View>
-
-      <View style={styles.imgContainer}>
-        <Image
-          source={require("../assets/images/exampleImage.jpg")}
-          style={styles.postImage}
-        />
-        <Text style={styles.postTitle}>Ліс</Text>
+              <View style={styles.imgInfo}>
+                <View style={styles.comments}>
+                  <Message />
+                  <Text style={styles.imgInfoText}>0</Text>
+                </View>
+                <View style={styles.location}>
+                  <MapPin />
+                  <Text style={styles.imgInfoText}>
+                    Ivano-Frankivs'k Region, Ukraine
+                  </Text>
+                </View>
+              </View>
+            </View>
+          );
+        })}
       </View>
     </ScrollView>
   );
@@ -94,6 +109,23 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     fontSize: 13,
   },
+  imgInfo: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  location: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 14,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  imgInfoText: {
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+  },
+  comments: { display: "flex", flexDirection: "row", gap: 6 },
 });
 
 export default PostsScreen;

@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-const Logout = () => {
+const MapPin = () => {
   return (
     <View style={styles.container}>
       <Svg
@@ -12,19 +12,17 @@ const Logout = () => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <Path
-          d="M10 22H5C3.89543 22 3 21.1046 3 20V4C3 2.89543 3.89543 2 5 2H10"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M20 10.3636C20 16.0909 12 21 12 21C12 21 4 16.0909 4 10.3636C4 6.29681 7.58172 3 12 3C16.4183 3 20 6.29681 20 10.3636V10.3636Z"
           stroke="#BDBDBD"
           stroke-linecap="round"
           stroke-linejoin="round"
         />
         <Path
-          d="M17 16L21 12L17 8"
-          stroke="#BDBDBD"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-        <Path
-          d="M21 12H9"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12 14C13.6569 14 15 12.6569 15 11C15 9.34315 13.6569 8 12 8C10.3431 8 9 9.34315 9 11C9 12.6569 10.3431 14 12 14Z"
           stroke="#BDBDBD"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -42,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Logout;
+export default MapPin;
