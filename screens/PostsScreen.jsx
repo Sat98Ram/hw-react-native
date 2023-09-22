@@ -31,6 +31,22 @@ const PostsScreen = () => {
         />
         <Text style={styles.postTitle}>Ліс</Text>
       </View>
+
+      <View style={styles.imgContainer}>
+        <Image
+          source={require("../assets/images/exampleImage.jpg")}
+          style={styles.postImage}
+        />
+        <Text style={styles.postTitle}>Ліс</Text>
+      </View>
+
+      <View style={styles.imgContainer}>
+        <Image
+          source={require("../assets/images/exampleImage.jpg")}
+          style={styles.postImage}
+        />
+        <Text style={styles.postTitle}>Ліс</Text>
+      </View>
     </ScrollView>
   );
 };
@@ -43,7 +59,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   imgContainer: {
-    marginTop: 32,
+    marginBottom: 32,
   },
   postImage: {
     height: 240,
@@ -65,6 +81,7 @@ const styles = StyleSheet.create({
   userBar: {
     flexDirection: "row",
     gap: 8,
+    marginBottom: 32,
   },
   userInfo: {
     justifyContent: "center",
