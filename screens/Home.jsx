@@ -4,9 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import PostsScreen from "./PostsScreen";
 import CreatePostsScreen from "./CreatePostsScreen";
 import ProfileScreen from "./ProfileScreen";
-import { Pressable, Text, View } from "react-native";
-import LogoutBtn from "../Components/LogoutBtn";
-import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +14,7 @@ const Home = () => {
       screenOptions={({ route }) => ({
         tabBarShowLabel: false,
         tabBarStyle: { paddingTop: 9, height: 56 },
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ color, size }) => {
           let iconName;
 
           if (route.name === "Posts") {

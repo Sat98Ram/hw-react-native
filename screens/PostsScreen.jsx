@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 
 import { useFonts } from "expo-font";
 import { useState } from "react";
-import { FlatList } from "react-native-gesture-handler";
 import MapPin from "../Components/Icons/MapPin";
 import Message from "../Components/Icons/Message";
 
