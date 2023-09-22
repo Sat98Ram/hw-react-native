@@ -10,22 +10,10 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
-// const logout = () => {
-//   return (
-//     <Pressable>
-//       <Text>Logout</Text>
-//     </Pressable>
-//   );
-// };
-
 const Home = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        //     tabBarOptions={{
-        //   activeTintColor: "#212121CC",
-        //   inactiveTintColor: "#212121CC",
-        // }},
         tabBarShowLabel: false,
         tabBarStyle: { paddingTop: 9, height: 56 },
         tabBarIcon: ({ focused, color, size }) => {

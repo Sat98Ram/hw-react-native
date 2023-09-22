@@ -39,7 +39,7 @@ const PostsScreen = () => {
       <View>
         {images.map((image) => {
           return (
-            <View style={styles.imgContainer}>
+            <View style={styles.imgContainer} key={image.id}>
               <Image
                 source={require("../assets/images/exampleImage.jpg")}
                 style={styles.postImage}
@@ -125,7 +125,11 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
     fontSize: 16,
   },
-  comments: { display: "flex", flexDirection: "row", gap: 6 },
+  comments: {
+    display: "flex",
+    flexDirection: "row",
+    // gap: 6,
+  },
 });
 
 export default PostsScreen;
