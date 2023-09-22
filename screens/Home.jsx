@@ -27,17 +27,33 @@ const Home = () => {
         //   inactiveTintColor: "#212121CC",
         // }},
         tabBarShowLabel: false,
-        tabBarStyle: { paddingTop: 9 },
+        tabBarStyle: { paddingTop: 9, height: 56 },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
           if (route.name === "Posts") {
             iconName = "grid-outline";
-          } else if (route.name === "CreatePosts") {
-            iconName = "add-outline";
           } else if (route.name === "Profile") {
             iconName = "person-outline";
           }
+
+          if (route.name === "CreatePosts") {
+            return (
+              <View
+                style={{
+                  backgroundColor: "#FF6C00",
+                  width: 70,
+                  height: 40,
+                  borderRadius: 20,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Ionicons name={"add-outline"} size={size} color={"#FFFFFF"} />
+              </View>
+            );
+          }
+
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: "#212121CC",
