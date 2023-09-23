@@ -1,8 +1,18 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  Pressable,
+  KeyboardAvoidingView,
+} from "react-native";
+import { useEffect, useState } from "react";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
-import { useEffect, useState } from "react";
+
 import CameraIcon from "../Components/Icons/CameraIcon";
+import MapPin from "../Components/Icons/MapPin";
 
 const CreatePostsScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -24,6 +34,16 @@ const CreatePostsScreen = () => {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
+
+  // const [fontsLoaded] = useFonts({
+  //   "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
+  //   "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
+  //   "Roboto-Bold": require("../assets/fonts/Roboto-Bold.ttf"),
+  // });
+
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
 
   return (
     <View style={styles.container}>
@@ -62,7 +82,33 @@ const CreatePostsScreen = () => {
         </Camera>
       </View>
 
-      <Text>Редагувати фото</Text>
+      <Text style={styles.textRedact}>Редагувати фото</Text>
+
+      <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+      >
+        <TextInput
+          style={styles.inputName}
+          keyboardType="default"
+          placeholder="Назва..."
+        />
+        <TextInput style={styles.inputLocation} placeholder="Місцевість..." />
+        <Text style={styles.mapIcon}>
+          <MapPin />
+        </Text>
+      </KeyboardAvoidingView>
+
+      <Pressable
+        onPress={console.log("publish")}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? "#FF6C00" : "#F6F6F6",
+          },
+          styles.buttonPublish,
+        ]}
+      >
+        <Text style={styles.buttonText}>Опубліковати</Text>
+      </Pressable>
     </View>
   );
 };
@@ -120,6 +166,48 @@ const styles = StyleSheet.create({
   //   backgroundColor: "white",
   //   borderRadius: 50,
   // },
+
+  textRedact: {
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    color: "#BDBDBD",
+    marginBottom: 32,
+  },
+  buttonPublish: {
+    borderRadius: 100,
+    paddingVertical: 16,
+    alignItems: "center",
+    width: "100%",
+  },
+  buttonText: {
+    color: "#BDBDBD",
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    lineHeight: 19,
+  },
+  inputName: {
+    borderBottom: 1,
+    borderBottomColor: "#E8E8E8",
+    height: 50,
+    marginBottom: 16,
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    width: "100%",
+  },
+  inputLocation: {
+    borderBottom: 1,
+    borderBottomColor: "#E8E8E8",
+    height: 50,
+    marginBottom: 32,
+    fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    width: "100%",
+    paddingLeft: 28,
+  },
+  mapIcon: {
+    position: "absolute",
+    top: 79,
+  },
 });
 
 export default CreatePostsScreen;
