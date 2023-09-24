@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   comments: {
     display: "flex",
     flexDirection: "row",
-    // gap: 6,
+    gap: 6,
   },
 });
 

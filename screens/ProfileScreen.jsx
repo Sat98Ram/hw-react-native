@@ -14,6 +14,7 @@ import background1x from "../assets/images/bg1x.jpg";
 import background2x from "../assets/images/bg2x.jpg";
 import MapPin from "../Components/Icons/MapPin";
 import MessageFilled from "../Components/Icons/MessageFilled";
+import Like from "../Components/Icons/Like";
 
 const ProfileScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
@@ -40,41 +41,92 @@ const ProfileScreen = ({ navigation }) => {
           <Text style={styles.userName}>Natali Romanova</Text>
 
           {/* <Image source={require("../assets/images/exampleImage.jpg")} /> */}
+          <ScrollView>
+            <View style={styles.postCard}>
+              <Image
+                source={require("../assets/images/exampleImage.jpg")}
+                style={styles.itemImage}
+              />
+              <Text style={styles.postTitle}>Ліс</Text>
 
-          <View>
-            <Image
-              source={require("../assets/images/exampleImage.jpg")}
-              style={styles.itemImage}
-            />
-            <Text style={styles.postTitle}>Ліс</Text>
+              <View style={styles.imgInfo}>
+                <View style={styles.infoLeft}>
+                  <TouchableOpacity
+                    style={styles.comments}
+                    onPress={() => navigation.navigate("CommentsScreen")}
+                  >
+                    <Text>
+                      <MessageFilled />
+                    </Text>
 
-            <View style={styles.imgInfo}>
-              <TouchableOpacity
-                style={styles.comments}
-                onPress={() => navigation.navigate("CommentsScreen")}
-              >
-                <Text>
-                  <MessageFilled />
-                </Text>
+                    <Text style={styles.imgInfoText}>0</Text>
+                  </TouchableOpacity>
 
-                <Text style={styles.imgInfoText}>0</Text>
-              </TouchableOpacity>
+                  <View style={styles.likes}>
+                    <Text>
+                      <Like />
+                    </Text>
 
-              <View style={styles.location}>
-                <Text
-                  onPress={() => {
-                    navigation.navigate("MapScreen");
-                  }}
-                >
-                  <MapPin />
-                </Text>
+                    <Text style={styles.imgInfoText}>153</Text>
+                  </View>
+                </View>
 
-                <Text style={styles.imgInfoText}>
-                  Ivano-Frankivs'k Region, Ukraine
-                </Text>
+                <View style={styles.location}>
+                  <Text
+                    onPress={() => {
+                      navigation.navigate("MapScreen");
+                    }}
+                  >
+                    <MapPin />
+                  </Text>
+
+                  <Text style={styles.imgInfoText}>Ukraine</Text>
+                </View>
               </View>
             </View>
-          </View>
+            <View style={styles.postCard}>
+              <Image
+                source={require("../assets/images/exampleImage.jpg")}
+                style={styles.itemImage}
+              />
+              <Text style={styles.postTitle}>Ліс</Text>
+
+              <View style={styles.imgInfo}>
+                <View style={styles.infoLeft}>
+                  <TouchableOpacity
+                    style={styles.comments}
+                    onPress={() => navigation.navigate("CommentsScreen")}
+                  >
+                    <Text>
+                      <MessageFilled />
+                    </Text>
+
+                    <Text style={styles.imgInfoText}>0</Text>
+                  </TouchableOpacity>
+
+                  <View style={styles.likes}>
+                    <Text>
+                      <Like />
+                    </Text>
+
+                    <Text style={styles.imgInfoText}>153</Text>
+                  </View>
+                </View>
+
+                <View style={styles.location}>
+                  <Text
+                    onPress={() => {
+                      navigation.navigate("MapScreen");
+                    }}
+                  >
+                    <MapPin />
+                  </Text>
+
+                  <Text style={styles.imgInfoText}>Ukraine</Text>
+                </View>
+              </View>
+            </View>
+          </ScrollView>
         </View>
       </ImageBackground>
     </View>
@@ -89,6 +141,7 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     justifyContent: "flex-end",
+    paddingTop: 147,
   },
 
   profileContainer: {
@@ -128,6 +181,31 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    marginBottom: 32,
+  },
+  comments: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 6,
+  },
+  likes: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 6,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  location: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  infoLeft: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 24,
   },
 });
 
