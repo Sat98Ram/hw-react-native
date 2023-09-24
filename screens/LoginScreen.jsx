@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useFonts } from "expo-font";
+import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
 import background1x from "../assets/images/bg1x.jpg";
@@ -24,6 +25,8 @@ const LoginScreen = ({ navigation }) => {
     "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),
     "Roboto-Bold": require("../assets/fonts/Roboto-Bold.ttf"),
   });
+
+  const dispatch = useDispatch();
 
   if (!fontsLoaded) {
     return null;

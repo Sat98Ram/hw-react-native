@@ -11,16 +11,20 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import { useState } from "react";
-import uuid from "react-native-uuid";
+// import uuid from "react-native-uuid";
 
 import background1x from "../assets/images/bg1x.jpg";
 import background2x from "../assets/images/bg2x.jpg";
 import UnionIcon from "../Components/Icons/Union";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../redux/auth/operations";
 
 const RegistrationScreen = ({ navigation }) => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
 
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
@@ -33,16 +37,17 @@ const RegistrationScreen = ({ navigation }) => {
   }
 
   const signUp = () => {
-    const id = uuid.v4();
-    const user = { id, login, password, email };
+    // const id = uuid.v4();
+    const user = { login, password, email };
 
+    dispatch(registerUser(user));
     console.log(user);
-
-    navigation.navigate("HomeScreen");
 
     setLogin("");
     setEmail("");
     setPassword("");
+
+    navigation.navigate("HomeScreen");
   };
 
   const keyboardVerticalOffset = Platform.OS === "ios" ? 150 : 150;
@@ -105,7 +110,6 @@ const RegistrationScreen = ({ navigation }) => {
             <Text style={styles.link}>
               Вже є акаунт?
               <Text onPress={() => navigation.navigate("LoginScreen")}>
-                {" "}
                 Увійти
               </Text>
             </Text>

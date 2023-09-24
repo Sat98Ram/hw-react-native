@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useFonts } from "expo-font";
+import { useDispatch } from "react-redux";
 
 import background1x from "../assets/images/bg1x.jpg";
 import background2x from "../assets/images/bg2x.jpg";
@@ -17,6 +18,7 @@ import MessageFilled from "../Components/Icons/MessageFilled";
 import Like from "../Components/Icons/Like";
 
 const ProfileScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("../assets/fonts/Roboto-Regular.ttf"),
     "Roboto-Medium": require("../assets/fonts/Roboto-Medium.ttf"),

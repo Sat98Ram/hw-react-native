@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TextInput } from "react-native";
 
 const CommentsScreen = () => {
   return (
@@ -9,6 +9,8 @@ const CommentsScreen = () => {
       />
 
       <View></View>
+
+      <TextInput placeholder="Коментувати..." />
     </View>
   );
 };
