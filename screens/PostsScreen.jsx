@@ -1,11 +1,17 @@
-import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
-
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { useFonts } from "expo-font";
 import { useState } from "react";
 import MapPin from "../Components/Icons/MapPin";
 import Message from "../Components/Icons/Message";
 
-const PostsScreen = () => {
+const PostsScreen = ({ navigation }) => {
   const [images, setImages] = useState([
     { id: "1", url: "../assets/images/exampleImage.jpg", name: "Ліс" },
     { id: "2", url: "../assets/images/exampleImage.jpg", name: "Ліс" },
@@ -46,12 +52,26 @@ const PostsScreen = () => {
               <Text style={styles.postTitle}>{image.name}</Text>
 
               <View style={styles.imgInfo}>
-                <View style={styles.comments}>
-                  <Message />
+                <TouchableOpacity
+                  style={styles.comments}
+                  onPress={() => navigation.navigate("CommentsScreen")}
+                >
+                  <Text>
+                    <Message />
+                  </Text>
+
                   <Text style={styles.imgInfoText}>0</Text>
-                </View>
+                </TouchableOpacity>
+
                 <View style={styles.location}>
-                  <MapPin />
+                  <Text
+                    onPress={() => {
+                      navigation.navigate("MapScreen");
+                    }}
+                  >
+                    <MapPin />
+                  </Text>
+
                   <Text style={styles.imgInfoText}>
                     Ivano-Frankivs'k Region, Ukraine
                   </Text>
@@ -116,7 +136,7 @@ const styles = StyleSheet.create({
   location: {
     display: "flex",
     flexDirection: "row",
-    gap: 14,
+    gap: 4,
     justifyContent: "center",
     alignItems: "center",
   },

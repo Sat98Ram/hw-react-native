@@ -14,7 +14,7 @@ import * as MediaLibrary from "expo-media-library";
 import CameraIcon from "../Components/Icons/CameraIcon";
 import MapPin from "../Components/Icons/MapPin";
 
-const CreatePostsScreen = () => {
+const CreatePostsScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -93,7 +93,12 @@ const CreatePostsScreen = () => {
           placeholder="Назва..."
         />
         <TextInput style={styles.inputLocation} placeholder="Місцевість..." />
-        <Text style={styles.mapIcon}>
+        <Text
+          style={styles.mapIcon}
+          onPress={() => {
+            navigation.navigate("MapScreen");
+          }}
+        >
           <MapPin />
         </Text>
       </KeyboardAvoidingView>
@@ -124,7 +129,6 @@ const styles = StyleSheet.create({
     height: 240,
     marginBottom: 8,
     backgroundColor: "#F6F6F6",
-    // objectFit: "contain",
     border: 1,
     borderColor: "#E8E8E8",
     borderRadius: 8,
@@ -132,7 +136,6 @@ const styles = StyleSheet.create({
 
   camera: {
     height: 240,
-    // objectFit: "contain",
   },
   photoView: {
     flex: 1,
@@ -186,7 +189,7 @@ const styles = StyleSheet.create({
     lineHeight: 19,
   },
   inputName: {
-    borderBottom: 1,
+    borderBottomWidth: 1,
     borderBottomColor: "#E8E8E8",
     height: 50,
     marginBottom: 16,
@@ -195,7 +198,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   inputLocation: {
-    borderBottom: 1,
+    borderBottomWidth: 1,
     borderBottomColor: "#E8E8E8",
     height: 50,
     marginBottom: 32,
