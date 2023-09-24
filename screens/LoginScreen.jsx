@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import background1x from "../assets/images/bg1x.jpg";
 import background2x from "../assets/images/bg2x.jpg";
+import { loginUser } from "../redux/auth/operations";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -35,6 +36,8 @@ const LoginScreen = ({ navigation }) => {
   const signIn = () => {
     const logedinUser = { password, email };
     console.log(logedinUser);
+
+    dispatch(loginUser(logedinUser));
     setEmail("");
     setPassword("");
 
